@@ -471,70 +471,10 @@
   .confirm-btn.yes:hover{ background: #b8282d; }
   .confirm-btn.no{ background:#fbfbfa; color: var(--sub); border:1px solid var(--border); }
   .confirm-btn.no:hover{ background: rgba(20,20,20,0.04); }
-  /* ===== PRINT / PDF EXPORT — dedicated print sheet, not a page screenshot ===== */
-  .print-sheet{ display:none; }
-  @media print{
-    body > *:not(.print-sheet){ display:none !important; }
-    .print-sheet{ display:block !important; }
-    @page{ margin: 16mm 14mm; }
-  }
-  .print-sheet{
-    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
-    color: #1a1a18;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .p-header{ border-bottom: 2px solid #1a1a18; padding-bottom: 14px; margin-bottom: 22px; }
-  .p-eyebrow{ font-size: 11px; letter-spacing: 1.5px; color: #666; font-weight:700; margin-bottom: 6px; }
-  .p-h1{
-    font-size: 26px; font-weight: 900; margin: 0 0 8px;
-  }
-  .p-meta{ font-size: 11.5px; color: #555; }
 
-  .p-section-title{
-    font-size: 16px; font-weight:700;
-    margin: 26px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #ccc;
-  }
-  .p-cat-title{
-    font-size: 12.5px; font-weight:700; color:#444;
-    letter-spacing: 0.5px;
-    margin: 18px 0 6px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  .p-cat-title:first-of-type{ margin-top: 4px; }
-
-  .p-item{
-    break-inside: avoid; page-break-inside: avoid;
-    padding: 10px 0;
-    border-bottom: 1px dashed #ddd;
-  }
-  .p-item-head{ display:flex; align-items:baseline; gap:8px; margin-bottom: 4px; }
-  .p-idx{ font-size: 11px; color: #888; font-weight:700; flex-shrink:0; }
-  .p-title{ font-size: 14px; font-weight:700; flex:1; }
-  .p-badge{
-    font-size: 10.5px; font-weight:700; color:#333;
-    border: 1px solid #999; border-radius: 999px;
-    padding: 1px 9px; flex-shrink:0; white-space:nowrap;
-  }
-  .p-detail{ font-size: 12px; line-height:1.75; color:#333; padding-left: 2px; }
-  .p-specs{ margin: 6px 0 0 18px; padding:0; font-size: 11.5px; color:#444; }
-  .p-specs li{ margin-bottom: 2px; }
-  .p-provider{ margin-top: 5px; font-size: 11px; color:#888; }
-
-  .p-equip-group{ break-inside: avoid; page-break-inside: avoid; margin-bottom: 16px; }
-  .p-equip-title{ font-size: 13px; font-weight:700; margin-bottom: 6px; }
-  .p-equip-list{ margin: 0 0 0 18px; padding:0; font-size: 12px; color:#333; }
-  .p-equip-list li{ margin-bottom: 3px; }
-  .p-model{ color:#777; font-size: 11px; }
-
-  .p-footer{ margin-top: 26px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 10.5px; color:#999; }
 </style>
 </head>
 <body>
-<div class="print-sheet" id="printSheet"></div>
 <div class="wrap">
 
   <div class="nav">
@@ -1077,10 +1017,7 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
   }
   specsFab.addEventListener('click', openSpecs);
   printBtn.addEventListener('click', () => {
-    buildPrintSheet();
-    // small delay so iOS Safari finishes rendering the injected content
-    // before print() is invoked — calling it immediately often no-ops on iOS
-    setTimeout(() => window.print(), 80);
+    openPrintSheet();
   });
   specsClose.addEventListener('click', closeSpecs);
   specsOverlay.addEventListener('click', (e) => { if (e.target === specsOverlay) closeSpecs(); });
@@ -1383,11 +1320,10 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 
   function esc(s){ return String(s || '').replace(/</g, '&lt;'); }
 
-  // ---- build the dedicated print / PDF layout (not a screenshot of the live page) ----
-  function buildPrintSheet(){
-    const sheet = document.getElementById('printSheet');
-    if (!sheet) return;
-
+  // ---- build the dedicated print / PDF layout as a standalone document in a
+  // new tab — isolated from the live page's Firestore listeners and DOM
+  // weight, which is what was making window.print() slow on mobile ----
+  function openPrintSheet(){
     const metaDateText = document.getElementById('metaDate')?.textContent || '';
     const metaCountText = document.getElementById('metaCount')?.textContent || '';
     const exportDate = toROCDate(Date.now());
@@ -1444,7 +1380,7 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
       `;
     });
 
-    sheet.innerHTML = `
+    const bodyHtml = `
       <div class="p-header">
         <div class="p-eyebrow">CUSTOM CHANGE · 客變規範彙整</div>
         <div class="p-h1">碧瑤敦灃 客變常見問題</div>
@@ -1459,6 +1395,63 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 
       <div class="p-footer">碧瑤敦灃・客變常見問題彙整・此份 PDF 由社區共用頁面匯出</div>
     `;
+
+    const doc = `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>碧瑤敦灃 客變常見問題</title>
+<style>
+  *{ box-sizing:border-box; }
+  body{
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    color:#1a1a18; background:#fff;
+    max-width:720px; margin:0 auto; padding:20px 16px 40px;
+  }
+  .p-header{ border-bottom:2px solid #1a1a18; padding-bottom:14px; margin-bottom:22px; }
+  .p-eyebrow{ font-size:11px; letter-spacing:1.5px; color:#666; font-weight:700; margin-bottom:6px; }
+  .p-h1{ font-size:26px; font-weight:900; margin:0 0 8px; }
+  .p-meta{ font-size:11.5px; color:#555; }
+  .p-section-title{ font-size:16px; font-weight:700; margin:26px 0 12px; padding-bottom:6px; border-bottom:1px solid #ccc; }
+  .p-cat-title{ font-size:12.5px; font-weight:700; color:#444; letter-spacing:0.5px; margin:18px 0 6px; padding-bottom:3px; border-bottom:1px solid #e5e5e5; }
+  .p-cat-title:first-of-type{ margin-top:4px; }
+  .p-item{ break-inside:avoid; page-break-inside:avoid; padding:10px 0; border-bottom:1px dashed #ddd; }
+  .p-item-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:4px; }
+  .p-idx{ font-size:11px; color:#888; font-weight:700; flex-shrink:0; }
+  .p-title{ font-size:14px; font-weight:700; flex:1; }
+  .p-badge{ font-size:10.5px; font-weight:700; color:#333; border:1px solid #999; border-radius:999px; padding:1px 9px; flex-shrink:0; white-space:nowrap; }
+  .p-detail{ font-size:12px; line-height:1.75; color:#333; padding-left:2px; }
+  .p-specs{ margin:6px 0 0 18px; padding:0; font-size:11.5px; color:#444; }
+  .p-specs li{ margin-bottom:2px; }
+  .p-provider{ margin-top:5px; font-size:11px; color:#888; }
+  .p-equip-group{ break-inside:avoid; page-break-inside:avoid; margin-bottom:16px; }
+  .p-equip-title{ font-size:13px; font-weight:700; margin-bottom:6px; }
+  .p-equip-list{ margin:0 0 0 18px; padding:0; font-size:12px; color:#333; }
+  .p-equip-list li{ margin-bottom:3px; }
+  .p-model{ color:#777; font-size:11px; }
+  .p-footer{ margin-top:26px; padding-top:10px; border-top:1px solid #ccc; font-size:10.5px; color:#999; }
+  .p-hint{
+    position: sticky; top:0; background:#fffbe8; border-bottom:1px solid #eddb9a;
+    color:#7a5b00; font-size:12.5px; text-align:center; padding:9px 12px;
+    margin: -20px -16px 20px;
+  }
+  @media print{ .p-hint{ display:none; } }
+  @page{ margin: 16mm 14mm; }
+</style>
+</head>
+<body>
+  <div class="p-hint">這是匯出用的頁面，可用瀏覽器的「分享／列印」功能存成 PDF</div>
+  ${bodyHtml}
+</body>
+</html>`;
+
+    const blob = new Blob([doc], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const win = window.open(url, '_blank');
+    if (!win){
+      alert('無法開啟新分頁，請確認瀏覽器沒有擋跳出視窗');
+    }
   }
 
   // ---- read the current effective content of a static "orig-" card into a plain object ----
