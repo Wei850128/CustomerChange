@@ -49,7 +49,7 @@
   .crumbs span.active{ color: var(--text); font-weight:700; }
 
   /* ===== HEADER ===== */
-  .header{ padding: 4px 0 32px; }
+  .header{ padding: 4px 0 20px; }
   .eyebrow{
     font-size: 14px; color: var(--accent); font-weight:700;
     letter-spacing:1.5px; margin-bottom: 14px;
@@ -65,8 +65,8 @@
     line-height:1.25;
   }
   .desc{ color: var(--sub); font-size: 17.5px; line-height:1.85; max-width: 680px; }
-  .meta{ display:flex; gap:24px; flex-wrap:wrap; margin-top: 20px; font-size: 15.5px; color: var(--muted); }
-  .header-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 20px; }
+  .meta{ display:flex; gap:24px; flex-wrap:wrap; margin-top: 14px; font-size: 15.5px; color: var(--muted); }
+  .header-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
   .header-btn{
     font-size: 14.5px; font-weight:600; color: var(--accent);
     background: var(--accent-bg);
@@ -76,6 +76,12 @@
     transition: background .15s ease, box-shadow .15s ease;
   }
   .header-btn:hover{ background: rgba(30,58,95,0.16); box-shadow: 0 2px 8px rgba(30,58,95,0.12); }
+  @media (max-width:600px){
+    .header{ padding-bottom: 14px; }
+    .header-actions{ gap:8px; margin-top: 12px; }
+    .header-btn{ font-size: 12.5px; padding: 7px 12px; }
+    .meta{ margin-top: 10px; gap: 14px; font-size: 13.5px; }
+  }
   .meta b{ color: var(--text); font-weight:700; }
 
   /* ===== STAT ROW ===== */
@@ -83,23 +89,30 @@
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    margin: 30px 0 42px;
+    margin: 20px 0 28px;
   }
   .stat{
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 22px 24px;
+    padding: 18px 22px;
     box-shadow: 0 2px 8px rgba(30,30,26,0.04);
   }
-  .stat .label{ font-size: 15px; color: var(--sub); margin-bottom: 12px; font-weight:600; }
+  .stat .label{ font-size: 15px; color: var(--sub); margin-bottom: 8px; font-weight:600; }
   .stat .val{ font-size: 38px; font-weight: 800; display:flex; align-items:baseline; gap:7px; }
   .stat .val small{ font-size: 16px; font-weight: 500; color: var(--sub); }
   .stat .val .n{ font-size:38px; }
   .stat.ok .val .n{ color: var(--green); }
   .stat.amber .val .n{ color: var(--amber); }
   .stat.red .val .n{ color: var(--red); }
-  @media (max-width:640px){ .stats{ grid-template-columns: 1fr; } }
+  @media (max-width:640px){
+    .stats{ grid-template-columns: repeat(3, 1fr); gap:8px; margin: 14px 0 20px; }
+    .stat{ padding: 12px 10px; border-radius: 14px; }
+    .stat .label{ font-size: 11.5px; margin-bottom: 4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .stat .val{ font-size: 22px; gap:3px; }
+    .stat .val .n{ font-size: 22px; }
+    .stat .val small{ font-size: 12px; }
+  }
 
   /* ===== SECTION ===== */
   .section-title{
@@ -1050,7 +1063,9 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
   specsFab.addEventListener('click', openSpecs);
   printBtn.addEventListener('click', () => {
     buildPrintSheet();
-    window.print();
+    // small delay so iOS Safari finishes rendering the injected content
+    // before print() is invoked — calling it immediately often no-ops on iOS
+    setTimeout(() => window.print(), 80);
   });
   specsClose.addEventListener('click', closeSpecs);
   specsOverlay.addEventListener('click', (e) => { if (e.target === specsOverlay) closeSpecs(); });
