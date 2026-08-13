@@ -200,8 +200,25 @@
   .badge.no{ background: var(--red-bg); color: var(--red); }
 
   @media (max-width:600px){
-    .card{ grid-template-columns: 26px 1fr; }
-    .card-actions{ grid-column: 1/-1; align-items:flex-start; flex-direction:row; justify-content:space-between; margin-top:10px; }
+    .card{
+      grid-template-columns: 20px 1fr;
+      padding: 14px 16px;
+      gap: 10px;
+      border-radius: 12px;
+    }
+    .idx{ font-size: 12px; }
+    .card h3{ font-size: 16px; margin-bottom: 4px; }
+    .card p{ font-size: 13.5px; line-height:1.6; }
+    .spec-tags{ margin-top:8px; gap:6px; }
+    .spec{ font-size: 12px; padding: 3px 9px; }
+    .provider-tag{ margin-top:6px; font-size: 11px; }
+    .badge{ font-size: 12px; padding: 5px 11px; }
+    .card-actions{
+      grid-column: 1/-1; align-items:center; flex-direction:row;
+      justify-content:space-between; margin-top:8px;
+    }
+    .del-btn, .edit-btn{ font-size: 12.5px; padding: 4px 6px; }
+    .list{ gap:8px; }
   }
 
   /* ===== NOTE ===== */
@@ -462,7 +479,7 @@
     @page{ margin: 16mm 14mm; }
   }
   .print-sheet{
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
     color: #1a1a18;
     max-width: 720px;
     margin: 0 auto;
@@ -470,13 +487,11 @@
   .p-header{ border-bottom: 2px solid #1a1a18; padding-bottom: 14px; margin-bottom: 22px; }
   .p-eyebrow{ font-size: 11px; letter-spacing: 1.5px; color: #666; font-weight:700; margin-bottom: 6px; }
   .p-h1{
-    font-family: "Noto Serif TC", serif;
     font-size: 26px; font-weight: 900; margin: 0 0 8px;
   }
   .p-meta{ font-size: 11.5px; color: #555; }
 
   .p-section-title{
-    font-family: "Noto Serif TC", serif;
     font-size: 16px; font-weight:700;
     margin: 26px 0 12px;
     padding-bottom: 6px;
