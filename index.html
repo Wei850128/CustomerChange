@@ -220,6 +220,14 @@
     box-shadow: 0 8px 22px rgba(30,30,26,0.14);
   }
   .fab-schedule:hover{ background: var(--accent-bg); }
+  .fab-specs{
+    bottom: 170px;
+    background: #fff; color: var(--accent);
+    border: 2px solid rgba(30,58,95,0.35);
+    font-size: 22px;
+    box-shadow: 0 8px 22px rgba(30,30,26,0.14);
+  }
+  .fab-specs:hover{ background: var(--accent-bg); }
 
   .modal-overlay{
     position: fixed; inset: 0; z-index: 50;
@@ -294,6 +302,34 @@
   .stage-date-row{ display:flex; gap:12px; font-size: 14.5px; align-items:baseline; }
   .d-label{ flex-shrink:0; width: 76px; color: var(--muted); font-weight:600; }
   .d-value{ color: var(--text); }
+
+  /* ===== EQUIPMENT SPEC MODAL CONTENT ===== */
+  .spec-group{ margin-bottom: 22px; }
+  .spec-group:last-child{ margin-bottom: 0; }
+  .spec-group-title{
+    display:flex; align-items:center; gap:9px;
+    font-size: 15.5px; font-weight:700; color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .spec-group-title .g-dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); }
+  .equip-list{ display:flex; flex-direction:column; gap:8px; }
+  .equip-row{
+    display:flex; align-items:baseline; gap:10px;
+    font-size: 14.5px; line-height:1.7;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.025);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .equip-name{ color: var(--text); font-weight:600; flex-shrink:0; }
+  .equip-model{ color: var(--sub); font-family:"Inter",monospace; font-size: 13.5px; }
+  .equip-note{
+    font-size: 14px; line-height:1.85; color: var(--sub);
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.025);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
 
   .modal-scroll{ display:flex; flex-direction:column; gap:16px; }
   .modal-scroll .field:first-child{ margin-top: 2px; }
@@ -578,8 +614,83 @@
 
 </div>
 
+<button class="fab-btn fab-specs" id="specsFab" title="設備型號" type="button">🔧</button>
 <button class="fab-btn fab-schedule" id="scheduleFab" title="客變日程" type="button">📅</button>
 <button class="fab-btn fab-add" id="fabBtn" title="新增客變項目" type="button">＋</button>
+
+<div class="modal-overlay" id="specsOverlay">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <div class="add-title">設備型號</div>
+        <div class="add-hint">碧瑤敦灃・原廠標配設備品牌與型號一覽</div>
+      </div>
+      <button class="modal-close" id="specsClose" type="button">✕</button>
+    </div>
+
+    <div class="modal-scroll">
+
+      <div class="spec-group">
+        <div class="spec-group-title"><span class="g-dot"></span>廚具櫃</div>
+        <div class="equip-list">
+          <div class="equip-row"><span class="equip-name">德國原裝進口 NOLTE 櫥櫃</span></div>
+          <div class="equip-row"><span class="equip-name">林內倒T排油煙機</span><span class="equip-model">MH-9029H</span></div>
+          <div class="equip-row"><span class="equip-name">SVAGO 雙口感應爐</span><span class="equip-model">TID3580</span></div>
+          <div class="equip-row"><span class="equip-name">ENZIK 不鏽鋼水槽</span><span class="equip-model">ENE-6545</span></div>
+          <div class="equip-row"><span class="equip-name">德國 HANSGROHE 廚房伸縮龍頭</span><span class="equip-model">71801</span></div>
+          <div class="equip-row"><span class="equip-name">德國 BOSCH 洗碗機</span><span class="equip-model">SPV2IKXOOX</span></div>
+          <div class="equip-row"><span class="equip-name">SVAGO 變頻微波烤箱</span><span class="equip-model">VE5070</span></div>
+          <div class="equip-row"><span class="equip-name">雙向緩降升降櫃</span><span class="equip-model">F09045</span></div>
+        </div>
+      </div>
+
+      <div class="spec-group">
+        <div class="spec-group-title"><span class="g-dot"></span>淨水器</div>
+        <div class="equip-list">
+          <div class="equip-row"><span class="equip-name">BWT SLIM 2 UF 高智能複合式羽纖淨水器・兩道式</span></div>
+        </div>
+      </div>
+
+      <div class="spec-group">
+        <div class="spec-group-title"><span class="g-dot"></span>衛浴設備</div>
+        <div class="equip-list">
+          <div class="equip-row"><span class="equip-name">全自動免治馬桶（主浴）</span><span class="equip-model">CES77110GTW-S1</span></div>
+          <div class="equip-row"><span class="equip-name">馬桶（客浴）</span><span class="equip-model">CW889CDRTW</span></div>
+          <div class="equip-row"><span class="equip-name">衛洗麗（客浴）</span><span class="equip-model">TCF23710ATW</span></div>
+          <div class="equip-row"><span class="equip-name">淋浴龍頭</span><span class="equip-model">TBV03426P-S2</span></div>
+          <div class="equip-row"><span class="equip-name">昇降桿</span><span class="equip-model">TBW01016P</span></div>
+          <div class="equip-row"><span class="equip-name">浴室乾燥機</span><span class="equip-model">TYB251GJT</span></div>
+          <div class="equip-row"><span class="equip-name">24吋毛巾架</span><span class="equip-model">AD01</span></div>
+          <div class="equip-row"><span class="equip-name">玻璃平台</span><span class="equip-model">AD05</span></div>
+          <div class="equip-row"><span class="equip-name">置衣平台</span><span class="equip-model">AD15R</span></div>
+          <div class="equip-row"><span class="equip-name">浴櫃（含檯面上臉盆）</span><span class="equip-model">LW711RCB</span></div>
+          <div class="equip-row"><span class="equip-name">臉盆龍頭</span><span class="equip-model">TLG04301PC</span></div>
+        </div>
+      </div>
+
+      <div class="spec-group">
+        <div class="spec-group-title"><span class="g-dot"></span>磁磚（冠軍磁磚）</div>
+        <div class="equip-list">
+          <div class="equip-row"><span class="equip-name">客、餐、廚、臥地磚 80×80cm</span><span class="equip-model">SB88001</span></div>
+          <div class="equip-row"><span class="equip-name">浴室地磚 30×30cm（主浴）</span><span class="equip-model">G3026</span></div>
+          <div class="equip-row"><span class="equip-name">浴室地磚 30×30cm（客浴）</span><span class="equip-model">G3025</span></div>
+          <div class="equip-row"><span class="equip-name">工作陽台地磚 15×75cm</span><span class="equip-model">C5717</span></div>
+          <div class="equip-row"><span class="equip-name">廚房壁磚 30×60cm</span><span class="equip-model">D3P33</span></div>
+          <div class="equip-row"><span class="equip-name">浴室壁磚 30×60cm（主浴）</span><span class="equip-model">D3P38</span></div>
+          <div class="equip-row"><span class="equip-name">浴室壁磚 30×60cm（客浴）</span><span class="equip-model">D6345</span></div>
+        </div>
+      </div>
+
+      <div class="spec-group">
+        <div class="spec-group-title"><span class="g-dot"></span>曬衣架</div>
+        <div class="equip-list">
+          <div class="equip-row"><span class="equip-name">和成曬衣架</span><span class="equip-model">AF8290</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="scheduleOverlay">
   <div class="modal-panel">
@@ -770,6 +881,9 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
   const scheduleFab = document.getElementById('scheduleFab');
   const scheduleOverlay = document.getElementById('scheduleOverlay');
   const scheduleClose = document.getElementById('scheduleClose');
+  const specsFab = document.getElementById('specsFab');
+  const specsOverlay = document.getElementById('specsOverlay');
+  const specsClose = document.getElementById('specsClose');
   const detailInput = document.getElementById('detailInput');
   const titleInput = document.getElementById('titleInput');
   const badgeInput = document.getElementById('badgeInput');
@@ -817,8 +931,20 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
   scheduleClose.addEventListener('click', closeSchedule);
   scheduleOverlay.addEventListener('click', (e) => { if (e.target === scheduleOverlay) closeSchedule(); });
 
+  function openSpecs(){
+    specsOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSpecs(){
+    specsOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  specsFab.addEventListener('click', openSpecs);
+  specsClose.addEventListener('click', closeSpecs);
+  specsOverlay.addEventListener('click', (e) => { if (e.target === specsOverlay) closeSpecs(); });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape'){ closeModal(); closeSchedule(); }
+    if (e.key === 'Escape'){ closeModal(); closeSchedule(); closeSpecs(); }
   });
 
   // ---- status pill select (manual override) ----
@@ -892,7 +1018,9 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
       });
       if (!response.ok) {
         const errText = await response.text().catch(() => '');
-        throw new Error('API 錯誤 ' + response.status + ' ' + errText);
+        const err = new Error('API 錯誤 ' + response.status + ' ' + errText);
+        err.status = response.status;
+        throw err;
       }
       const data = await response.json();
       const raw = data?.choices?.[0]?.message?.content?.trim() || '';
@@ -904,7 +1032,11 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
       genStatusNote.textContent = '已自動填入，可再手動調整';
       genStatusNote.className = 'status-note';
     } catch (err) {
-      genStatusNote.textContent = 'AI 判斷失敗，請手動填寫標題與狀態';
+      if (err && err.status === 429){
+        genStatusNote.textContent = '今日 AI 額度已用完，請直接手動輸入標題與狀態';
+      } else {
+        genStatusNote.textContent = 'AI 判斷失敗，請手動填寫標題與狀態';
+      }
       genStatusNote.className = 'status-note error';
       console.error(err);
     } finally {
@@ -917,7 +1049,7 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
   // ---- stats ----
   function updateStats(){
     const counts = { ok: 0, cond: 0, no: 0 };
-    listEl.querySelectorAll('.card').forEach(card => {
+    document.querySelectorAll('.list .card').forEach(card => {
       if (card.style.display === 'none') return;
       const b = card.querySelector('.badge');
       if (!b) return;
@@ -930,15 +1062,18 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
     document.querySelector('.stat.red .n').textContent = counts.no;
   }
 
-  // ---- renumber visible cards ----
-  function renumber(){
+  // ---- renumber visible cards within a given container ----
+  function renumber(container){
     let n = 1;
-    listEl.querySelectorAll('.card').forEach(card => {
+    (container || listEl).querySelectorAll('.card').forEach(card => {
       if (card.style.display === 'none') return;
       const idxEl = card.querySelector('.idx');
       if (idxEl) idxEl.textContent = String(n).padStart(2,'0');
       n++;
     });
+  }
+  function renumberAll(){
+    renumber(listEl);
   }
 
   // ---- sorting ----
@@ -987,7 +1122,7 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
       sectionSub.textContent = '依變動類別分組排列，同類別內依原始順序排列';
     }
     hidden.forEach(card => listEl.appendChild(card));
-    renumber();
+    renumber(listEl);
   }
   sortRow.addEventListener('click', (e) => {
     const btn = e.target.closest('.sort-btn');
@@ -1036,12 +1171,12 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
     if (del) del.style.display = '';
   }
 
-  listEl.addEventListener('click', (e) => {
+  document.addEventListener('click', (e) => {
     const delBtn = e.target.closest('.del-btn');
     if (delBtn){
       const wrapper = delBtn.closest('.card-actions');
       // close any other open confirm prompts first
-      listEl.querySelectorAll('.card-actions').forEach(w => { if (w !== wrapper) closeConfirm(w); });
+      document.querySelectorAll('.card-actions').forEach(w => { if (w !== wrapper) closeConfirm(w); });
       if (wrapper.querySelector('.confirm-row')) return;
       delBtn.style.display = 'none';
       const row = document.createElement('div');
@@ -1061,12 +1196,8 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
       closeConfirm(noBtn.closest('.card-actions'));
       return;
     }
-  });
-
-  // clicking anywhere outside a card cancels any open confirm prompt
-  document.addEventListener('click', (e) => {
     if (e.target.closest('.card-actions')) return;
-    listEl.querySelectorAll('.card-actions').forEach(w => closeConfirm(w));
+    document.querySelectorAll('.card-actions').forEach(w => closeConfirm(w));
   });
 
   // ---- build & append a card ----
@@ -1095,15 +1226,18 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 
   // ---- Firestore real-time sync: everyone viewing this page sees the same data ----
   function initRealtime(){
-    // wire up the 12 static original cards first
-    listEl.querySelectorAll('.card').forEach((card, i) => {
-      wireCardActions(card, 'orig-' + (i + 1));
-      card.dataset.order = i + 1;
+    // wire up the static original cards first — continuous numbering across
+    // both the main list and the kitchen section so ids stay unique
+    let n = 0;
+    document.querySelectorAll('.list .card').forEach((card) => {
+      n++;
+      wireCardActions(card, 'orig-' + n);
+      card.dataset.order = n;
     });
 
     onSnapshot(hiddenCol, (snapshot) => {
       hiddenOriginals = snapshot.docs.map(d => d.id);
-      listEl.querySelectorAll('.card[data-id^="orig-"]').forEach(card => {
+      document.querySelectorAll('.list .card[data-id^="orig-"]').forEach(card => {
         card.style.display = hiddenOriginals.includes(card.dataset.id) ? 'none' : '';
       });
       applySort(currentSortMode);
