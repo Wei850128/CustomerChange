@@ -233,8 +233,9 @@
     background: var(--card);
     width: 100%; max-width: 640px;
     border-radius: 20px 20px 0 0;
-    max-height: 88vh; overflow-y: auto;
-    padding: 26px 26px 30px;
+    max-height: 88vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
     box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
     animation: panelUp .22s ease;
   }
@@ -246,7 +247,9 @@
 
   .modal-head{
     display:flex; align-items:flex-start; justify-content:space-between;
-    gap:16px; margin-bottom: 18px;
+    gap:16px;
+    flex-shrink: 0;
+    padding: 26px 26px 18px;
   }
   .add-title{ font-size: 18.5px; font-weight:700; }
   .add-hint{ font-size: 15px; color: var(--muted); margin-top:4px; }
@@ -257,6 +260,18 @@
     transition: background .15s ease, color .15s ease;
   }
   .modal-close:hover{ background: rgba(0,0,0,0.09); color: var(--text); }
+
+  .modal-scroll{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 0 26px 22px;
+  }
+  .modal-footer{
+    flex-shrink: 0;
+    padding: 16px 26px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--card);
+  }
 
   /* ===== SCHEDULE MODAL CONTENT ===== */
   .schedule-notice{
@@ -280,7 +295,8 @@
   .d-label{ flex-shrink:0; width: 76px; color: var(--muted); font-weight:600; }
   .d-value{ color: var(--text); }
 
-  .add-body-inner{ display:flex; flex-direction:column; gap:16px; }
+  .modal-scroll{ display:flex; flex-direction:column; gap:16px; }
+  .modal-scroll .field:first-child{ margin-top: 2px; }
 
   .field label{
     display:block; font-size: 15px; font-weight:700; color: var(--sub);
@@ -575,56 +591,58 @@
       <button class="modal-close" id="scheduleClose" type="button">✕</button>
     </div>
 
-    <div class="schedule-notice">
-      本人同意於 115 年 11 月 1 日起至 116 年 2 月 28 日止，將欲變更之相關建築圖說提供給公司並完成室內工程變更相關程序，逾期則視同放棄變更權利。辦理變更的時段是依各階段該樓層戶別的日期為主。
-    </div>
-
-    <div class="stage-list">
-
-      <div class="stage-card">
-        <div class="stage-head">
-          <span class="stage-tag">第一階段</span>
-          <span class="stage-floor">2 ~ 8 樓</span>
-        </div>
-        <div class="stage-dates">
-          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 9 月 15 日 至 115 年 10 月 14 日</span></div>
-          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 11 月 1 日 至 115 年 11 月 30 日</span></div>
-        </div>
+    <div class="modal-scroll">
+      <div class="schedule-notice">
+        本人同意於 115 年 11 月 1 日起至 116 年 2 月 28 日止，將欲變更之相關建築圖說提供給公司並完成室內工程變更相關程序，逾期則視同放棄變更權利。辦理變更的時段是依各階段該樓層戶別的日期為主。
       </div>
 
-      <div class="stage-card">
-        <div class="stage-head">
-          <span class="stage-tag">第二階段</span>
-          <span class="stage-floor">9 ~ 14 樓</span>
-        </div>
-        <div class="stage-dates">
-          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 10 月 15 日 至 115 年 11 月 14 日</span></div>
-          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 12 月 1 日 至 115 年 12 月 31 日</span></div>
-        </div>
-      </div>
+      <div class="stage-list">
 
-      <div class="stage-card">
-        <div class="stage-head">
-          <span class="stage-tag">第三階段</span>
-          <span class="stage-floor">15 ~ 20 樓</span>
+        <div class="stage-card">
+          <div class="stage-head">
+            <span class="stage-tag">第一階段</span>
+            <span class="stage-floor">2 ~ 8 樓</span>
+          </div>
+          <div class="stage-dates">
+            <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 9 月 15 日 至 115 年 10 月 14 日</span></div>
+            <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 11 月 1 日 至 115 年 11 月 30 日</span></div>
+          </div>
         </div>
-        <div class="stage-dates">
-          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 11 月 15 日 至 115 年 12 月 14 日</span></div>
-          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 1 月 1 日 至 116 年 1 月 31 日</span></div>
-        </div>
-      </div>
 
-      <div class="stage-card">
-        <div class="stage-head">
-          <span class="stage-tag">第四階段</span>
-          <span class="stage-floor">21 ~ 24 樓</span>
+        <div class="stage-card">
+          <div class="stage-head">
+            <span class="stage-tag">第二階段</span>
+            <span class="stage-floor">9 ~ 14 樓</span>
+          </div>
+          <div class="stage-dates">
+            <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 10 月 15 日 至 115 年 11 月 14 日</span></div>
+            <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 12 月 1 日 至 115 年 12 月 31 日</span></div>
+          </div>
         </div>
-        <div class="stage-dates">
-          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 12 月 15 日 至 116 年 1 月 14 日</span></div>
-          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 2 月 1 日 至 116 年 2 月 28 日</span></div>
-        </div>
-      </div>
 
+        <div class="stage-card">
+          <div class="stage-head">
+            <span class="stage-tag">第三階段</span>
+            <span class="stage-floor">15 ~ 20 樓</span>
+          </div>
+          <div class="stage-dates">
+            <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 11 月 15 日 至 115 年 12 月 14 日</span></div>
+            <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 1 月 1 日 至 116 年 1 月 31 日</span></div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <span class="stage-tag">第四階段</span>
+            <span class="stage-floor">21 ~ 24 樓</span>
+          </div>
+          <div class="stage-dates">
+            <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 12 月 15 日 至 116 年 1 月 14 日</span></div>
+            <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 2 月 1 日 至 116 年 2 月 28 日</span></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
@@ -639,7 +657,7 @@
       <button class="modal-close" id="modalClose" type="button">✕</button>
     </div>
 
-    <div class="add-body-inner">
+    <div class="modal-scroll">
 
       <div class="field">
         <label>細相說明</label>
@@ -679,11 +697,13 @@
         <div class="draft-tags" id="draftTags" style="margin-top:10px;"></div>
       </div>
 
+    </div>
+
+    <div class="modal-footer">
       <div class="add-actions">
         <span class="status-note" id="addStatusNote"></span>
         <button class="submit-btn" id="submitBtn">新增項目</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -740,7 +760,7 @@ const hiddenCol = collection(db, 'biyaoDunfengHiddenOriginals');
    (https://aistudio.google.com → Get API key，免費、不用信用卡)
    ===================================================================== */
 const GEMINI_API_KEY = "AQ.Ab8RN6Kvp9NW5-j9QHX1TkC3sGNIILDjk5_p8rRPDBU0Zg8N4A";
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-3.6-flash";
 
 (function(){
   const listEl = document.querySelector('.list');
@@ -857,17 +877,20 @@ const GEMINI_MODEL = "gemini-2.5-flash";
         '3. status：判斷這項客變的整體性質，只能是三選一 —— "ok" 表示可以自由變動、沒有額外限制；"cond" 表示可以變動但有條件、範圍限制、或需退料自行施作；"no" 表示不可變動或型號規格固定。'
       ].join('\n');
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GEMINI_API_KEY}` },
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: systemPrompt }] },
           contents: [ { role: 'user', parts: [{ text: detail }] } ],
           generationConfig: { responseMimeType: 'application/json' }
         })
       });
-      if (!response.ok) throw new Error('API 錯誤 ' + response.status);
+      if (!response.ok) {
+        const errText = await response.text().catch(() => '');
+        throw new Error('API 錯誤 ' + response.status + ' ' + errText);
+      }
       const data = await response.json();
       const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
       const parsed = JSON.parse(raw);
