@@ -759,8 +759,8 @@ const hiddenCol = collection(db, 'biyaoDunfengHiddenOriginals');
    GEMINI API 金鑰 — 請替換成你自己在 Google AI Studio 申請的金鑰
    (https://aistudio.google.com → Get API key，免費、不用信用卡)
    ===================================================================== */
-const GEMINI_API_KEY = "AQ.Ab8RN6IOW8MI3E-598nLA5Sddk9uMJ3EFya6A8Myaibj5yvRlA";
-const GEMINI_MODEL = "gemini-3.6-flash";
+const GROQ_API_KEY = "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";
+const GROQ_MODEL = "llama-3.3-70b-versatile";
 
 (function(){
   const listEl = document.querySelector('.list');
@@ -877,14 +877,17 @@ const GEMINI_MODEL = "gemini-3.6-flash";
         '3. status：判斷這項客變的整體性質，只能是三選一 —— "ok" 表示可以自由變動、沒有額外限制；"cond" 表示可以變動但有條件、範圍限制、或需退料自行施作；"no" 表示不可變動或型號規格固定。'
       ].join('\n');
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+      const url = `https://api.groq.com/openai/v1/chat/completions`;
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': GEMINI_API_KEY },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: [ { role: 'user', parts: [{ text: detail }] } ],
-          generationConfig: { responseMimeType: 'application/json' }
+          model: GROQ_MODEL,
+          response_format: { type: 'json_object' },
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: detail }
+          ]
         })
       });
       if (!response.ok) {
@@ -892,7 +895,7 @@ const GEMINI_MODEL = "gemini-3.6-flash";
         throw new Error('API 錯誤 ' + response.status + ' ' + errText);
       }
       const data = await response.json();
-      const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+      const raw = data?.choices?.[0]?.message?.content?.trim() || '';
       const parsed = JSON.parse(raw);
       if (!parsed.title || !parsed.badge || !parsed.status) throw new Error('回傳格式不完整');
       titleInput.value = String(parsed.title).trim();
