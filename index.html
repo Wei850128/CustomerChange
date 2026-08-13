@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>碧瑤敦灃｜客變常見問題</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --card-hi: #fdfcf9;
+    --border: rgba(30,30,26,0.09);
+    --text: #1b1a17;
+    --sub: #625f58;
+    --muted: #9a9690;
+    --accent: #1e3a5f;
+    --accent-bg: rgba(30,58,95,0.08);
+    --green: #1f8f56;
+    --green-bg: rgba(31,143,86,0.11);
+    --amber: #b06a1a;
+    --amber-bg: rgba(176,106,26,0.11);
+    --red: #c73b3f;
+    --red-bg: rgba(199,59,63,0.09);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family:"Inter","Noto Sans TC",sans-serif;
+    font-size: 17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 24px 72px; }
+
+  /* ===== NAV ===== */
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .brand{ display:flex; align-items:center; gap:11px; font-weight:700; font-size:19px; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-bg); }
+  .crumbs{ display:flex; gap:20px; font-size: 16px; color: var(--sub); }
+  .crumbs span.active{ color: var(--text); font-weight:700; }
+
+  /* ===== HEADER ===== */
+  .header{ padding: 4px 0 32px; }
+  .eyebrow{
+    font-size: 14px; color: var(--accent); font-weight:700;
+    letter-spacing:1.5px; margin-bottom: 14px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:2px; background: var(--accent); }
+  h1{
+    font-family:"Noto Serif TC", serif;
+    font-size: clamp(34px,5.2vw,48px);
+    font-weight: 900;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+    line-height:1.25;
+  }
+  .desc{ color: var(--sub); font-size: 17.5px; line-height:1.85; max-width: 680px; }
+  .meta{ display:flex; gap:24px; flex-wrap:wrap; margin-top: 20px; font-size: 15.5px; color: var(--muted); }
+  .meta b{ color: var(--text); font-weight:700; }
+
+  /* ===== STAT ROW ===== */
+  .stats{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 30px 0 42px;
+  }
+  .stat{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 8px rgba(30,30,26,0.04);
+  }
+  .stat .label{ font-size: 15px; color: var(--sub); margin-bottom: 12px; font-weight:600; }
+  .stat .val{ font-size: 38px; font-weight: 800; display:flex; align-items:baseline; gap:7px; }
+  .stat .val small{ font-size: 16px; font-weight: 500; color: var(--sub); }
+  .stat .val .n{ font-size:38px; }
+  .stat.ok .val .n{ color: var(--green); }
+  .stat.amber .val .n{ color: var(--amber); }
+  .stat.red .val .n{ color: var(--red); }
+  @media (max-width:640px){ .stats{ grid-template-columns: 1fr; } }
+
+  /* ===== SECTION ===== */
+  .section-title{
+    font-family:"Noto Serif TC", serif;
+    font-size: 22px; font-weight: 700; margin: 0 0 6px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-sub{ font-size:16px; color: var(--sub); margin: 0 0 20px; }
+
+  /* ===== SORT ROW ===== */
+  .list-toolbar{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:14px;
+    margin: 0 0 18px;
+  }
+  .sort-row{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .sort-label{ font-size: 15px; font-weight:700; color: var(--sub); margin-right:2px; }
+  .sort-btn{
+    font-size: 14.5px; font-weight:600;
+    padding: 8px 16px; border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card); color: var(--sub);
+    cursor:pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .sort-btn:hover{ border-color: rgba(30,58,95,0.3); }
+  .sort-btn[data-active="true"]{
+    background: var(--accent-bg); color: var(--accent);
+    border-color: rgba(30,58,95,0.35);
+  }
+  .group-label{
+    display:flex; align-items:center; gap:10px;
+    font-size: 14.5px; font-weight:700; color: var(--muted);
+    letter-spacing: .5px;
+    margin: 6px 2px 2px;
+  }
+  .group-label .g-dot{ width:8px; height:8px; border-radius:50%; }
+  .group-label.ok .g-dot{ background: var(--green); }
+  .group-label.cond .g-dot{ background: var(--amber); }
+  .group-label.no .g-dot{ background: var(--red); }
+  .group-label:first-child{ margin-top:0; }
+
+  /* ===== CARD LIST ===== */
+  .list{ display:flex; flex-direction:column; gap:12px; }
+  .card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display:grid;
+    grid-template-columns: 38px 1fr auto;
+    gap: 18px;
+    align-items: start;
+    box-shadow: 0 2px 8px rgba(30,30,26,0.04);
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+  }
+  .card:has(.badge.ok){ border-left-color: var(--green); }
+  .card:has(.badge.cond){ border-left-color: var(--amber); }
+  .card:has(.badge.no){ border-left-color: var(--red); }
+  .card:hover{ background: var(--card-hi); box-shadow: 0 6px 18px rgba(30,30,26,0.08); transform: translateY(-1px); }
+  .idx{ font-size: 15px; color: var(--muted); font-weight:700; padding-top:2px; font-variant-numeric: tabular-nums; }
+  .card h3{ margin:0 0 8px; font-size: 20px; font-weight:700; letter-spacing:0.2px; }
+  .card p{ margin:0; font-size: 16.5px; line-height:1.85; color: var(--sub); }
+  .spec-tags{ margin-top:12px; display:flex; gap:9px; flex-wrap:wrap; }
+  .spec{
+    font-size: 14.5px; font-weight:600; color: var(--text);
+    background: rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .badge{
+    font-size: 14.5px; font-weight: 700;
+    padding: 7px 15px; border-radius: 999px;
+    white-space: nowrap; height: fit-content;
+  }
+  .badge.ok{ background: var(--green-bg); color: var(--green); }
+  .badge.cond{ background: var(--amber-bg); color: var(--amber); }
+  .badge.no{ background: var(--red-bg); color: var(--red); }
+
+  @media (max-width:600px){
+    .card{ grid-template-columns: 26px 1fr; }
+    .card-actions{ grid-column: 1/-1; align-items:flex-start; flex-direction:row; justify-content:space-between; margin-top:10px; }
+  }
+
+  /* ===== NOTE ===== */
+  .note{
+    margin-top: 34px;
+    background: var(--red-bg);
+    border: 1px solid rgba(199,59,63,0.25);
+    border-radius: 16px;
+    padding: 22px 24px;
+  }
+  .note .label{ font-size:15px; font-weight:700; color: var(--red); letter-spacing:1px; margin-bottom:10px; }
+  .note p{ margin:0 0 8px; font-size:16.5px; line-height:1.9; color:#7a2a2d; }
+  .note p:last-child{ margin-bottom:0; }
+  .note b{ color:#8a2327; }
+
+  footer{
+    margin-top: 44px; padding-top: 22px;
+    border-top: 1px solid var(--border);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-size: 15px; color: var(--muted);
+  }
+
+  /* ===== FAB + MODALS ===== */
+  .fab-btn{
+    position: fixed; right: 26px; z-index: 40;
+    width: 60px; height: 60px; border-radius: 50%;
+    border: none; cursor: pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .fab-btn:hover{ transform: scale(1.06); }
+  .fab-btn:active{ transform: scale(0.95); }
+  .fab-add{
+    bottom: 26px;
+    background: var(--accent); color: #fff;
+    font-size: 30px; font-weight: 300; line-height: 1;
+    box-shadow: 0 10px 26px rgba(30,58,95,0.38);
+  }
+  .fab-add:hover{ box-shadow: 0 12px 30px rgba(30,58,95,0.46); }
+  .fab-schedule{
+    bottom: 98px;
+    background: #fff; color: var(--accent);
+    border: 2px solid rgba(30,58,95,0.35);
+    font-size: 23px;
+    box-shadow: 0 8px 22px rgba(30,30,26,0.14);
+  }
+  .fab-schedule:hover{ background: var(--accent-bg); }
+
+  .modal-overlay{
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(20,20,18,0.45);
+    display:none; align-items:flex-end; justify-content:center;
+  }
+  .modal-overlay.open{ display:flex; animation: overlayIn .18s ease; }
+  @keyframes overlayIn{ from{ opacity:0; } to{ opacity:1; } }
+
+  .modal-panel{
+    background: var(--card);
+    width: 100%; max-width: 640px;
+    border-radius: 20px 20px 0 0;
+    max-height: 88vh; overflow-y: auto;
+    padding: 26px 26px 30px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+    animation: panelUp .22s ease;
+  }
+  @keyframes panelUp{ from{ transform: translateY(28px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+  @media (min-width:720px){
+    .modal-overlay{ align-items:center; padding: 24px; }
+    .modal-panel{ border-radius: 20px; }
+  }
+
+  .modal-head{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    gap:16px; margin-bottom: 18px;
+  }
+  .add-title{ font-size: 18.5px; font-weight:700; }
+  .add-hint{ font-size: 15px; color: var(--muted); margin-top:4px; }
+  .modal-close{
+    border:none; background: rgba(0,0,0,0.05); color: var(--sub);
+    width: 34px; height: 34px; border-radius: 50%;
+    font-size: 15px; cursor:pointer; flex-shrink:0;
+    transition: background .15s ease, color .15s ease;
+  }
+  .modal-close:hover{ background: rgba(0,0,0,0.09); color: var(--text); }
+
+  /* ===== SCHEDULE MODAL CONTENT ===== */
+  .schedule-notice{
+    font-size: 14.5px; line-height: 1.85; color: var(--sub);
+    background: rgba(0,0,0,0.03); border: 1px solid var(--border);
+    border-radius: 12px; padding: 15px 17px; margin-bottom: 20px;
+  }
+  .stage-list{ display:flex; flex-direction:column; gap:12px; }
+  .stage-card{
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 17px 19px; background: var(--card);
+  }
+  .stage-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .stage-tag{ font-size: 16px; font-weight:700; color: var(--text); }
+  .stage-floor{
+    font-size: 14px; font-weight:600; color: var(--sub);
+    background: rgba(0,0,0,0.05); padding: 3px 11px; border-radius: 999px;
+  }
+  .stage-dates{ display:flex; flex-direction:column; gap:7px; }
+  .stage-date-row{ display:flex; gap:12px; font-size: 14.5px; align-items:baseline; }
+  .d-label{ flex-shrink:0; width: 76px; color: var(--muted); font-weight:600; }
+  .d-value{ color: var(--text); }
+
+  .add-body-inner{ display:flex; flex-direction:column; gap:16px; }
+
+  .field label{
+    display:block; font-size: 15px; font-weight:700; color: var(--sub);
+    margin-bottom: 8px;
+  }
+  .field textarea, .field input[type="text"]{
+    width:100%;
+    font-family:"Inter","Noto Sans TC",sans-serif;
+    font-size: 17px;
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fbfaf7;
+    color: var(--text);
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  .field textarea{ min-height: 88px; line-height:1.75; }
+  .field textarea:focus, .field input[type="text"]:focus{
+    outline: none; border-color: rgba(30,58,95,0.4);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--accent-bg);
+  }
+
+  .title-row{ display:flex; gap:10px; align-items:center; }
+  .title-row input{ flex:1; }
+  .gen-btn{
+    flex-shrink:0;
+    font-size: 15px; font-weight:700;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(30,58,95,0.3);
+    background: var(--accent-bg); color: var(--accent);
+    cursor:pointer;
+    white-space:nowrap;
+    transition: opacity .2s ease, background .2s ease;
+  }
+  .gen-btn:hover:not(:disabled){ background: rgba(30,58,95,0.14); }
+  .gen-btn:disabled{ opacity:.55; cursor:default; }
+
+  .status-row{ display:flex; gap:9px; flex-wrap:wrap; }
+  .status-pill{
+    font-size: 15px; font-weight:600;
+    padding: 9px 17px; border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fbfaf7; color: var(--sub);
+    cursor:pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .status-pill[data-active="true"].ok{ background: var(--green-bg); color: var(--green); border-color: rgba(31,143,86,0.35); }
+  .status-pill[data-active="true"].cond{ background: var(--amber-bg); color: var(--amber); border-color: rgba(176,106,26,0.35); }
+  .status-pill[data-active="true"].no{ background: var(--red-bg); color: var(--red); border-color: rgba(199,59,63,0.35); }
+
+  .spec-input-row{ display:flex; gap:9px; }
+  .spec-input-row input{ flex:1; }
+  .small-btn{
+    font-size: 15px; font-weight:600;
+    padding: 0 17px; border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fbfaf7; color: var(--sub);
+    cursor:pointer;
+  }
+  .draft-tags{ display:flex; gap:9px; flex-wrap:wrap; }
+  .draft-tags .spec{ cursor:pointer; }
+  .draft-tags .spec .x{ margin-left:7px; color: var(--muted); }
+
+  .add-actions{ display:flex; justify-content:flex-end; align-items:center; gap:14px; margin-top:6px; }
+  .submit-btn{
+    font-size: 16px; font-weight:700; color:#fff;
+    background: var(--text);
+    padding: 13px 24px; border-radius: 12px;
+    border: none; cursor:pointer;
+    transition: opacity .15s ease;
+  }
+  .submit-btn:hover{ opacity:.88; }
+  .submit-btn:disabled{ opacity:.4; cursor:default; }
+  .status-note{ font-size: 14.5px; color: var(--muted); }
+  .status-note.error{ color: var(--red); }
+
+  /* ===== CARD ACTIONS / DELETE ===== */
+  .card-actions{
+    display:flex; flex-direction:column; align-items:flex-end; gap:9px;
+  }
+  .del-btn{
+    border:none; background:transparent; color: var(--muted);
+    font-size: 15px; font-weight:600; line-height:1; cursor:pointer;
+    padding: 5px 8px; border-radius: 8px;
+    transition: color .15s ease, background .15s ease;
+  }
+  .del-btn:hover{ color: var(--red); background: var(--red-bg); }
+  .card.removing{ opacity:0; transform: translateX(6px); transition: opacity .18s ease, transform .18s ease; }
+
+  .confirm-row{
+    display:flex; align-items:center; gap:9px;
+    animation: confirmIn .15s ease;
+  }
+  @keyframes confirmIn{ from{ opacity:0; transform:translateY(-2px);} to{ opacity:1; transform:translateY(0);} }
+  .confirm-text{ font-size: 14.5px; color: var(--red); font-weight:600; white-space:nowrap; }
+  .confirm-btn{
+    font-size: 14px; font-weight:700; border-radius: 8px;
+    padding: 6px 12px; cursor:pointer; white-space:nowrap;
+  }
+  .confirm-btn.yes{ background: var(--red); color:#fff; border:1px solid var(--red); }
+  .confirm-btn.yes:hover{ background: #b8282d; }
+  .confirm-btn.no{ background:#fbfbfa; color: var(--sub); border:1px solid var(--border); }
+  .confirm-btn.no:hover{ background: rgba(20,20,20,0.04); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav">
+    <div class="brand"><span class="dot"></span>客變資訊站</div>
+    <div class="crumbs"><span class="active">碧瑤敦灃</span><span>客變 FAQ</span></div>
+  </div>
+
+  <div class="header">
+    <div class="eyebrow">CUSTOM CHANGE · 客變規範彙整</div>
+    <h1>碧瑤敦灃 客變常見問題</h1>
+    <div class="desc">整理工地端提供之客變規範，標示各項目是否可調整、調整範圍與限制條件，供簽約前確認參考。</div>
+    <div class="meta">
+      <span><b>建案</b> 碧瑤敦灃</span>
+      <span><b>彙整日期</b> 115.08.11</span>
+      <span><b>共計</b> 12 項</span>
+      <span>🔄 新增／刪除為全社區共用，即時同步（Firebase）</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat ok">
+      <div class="label">可變動</div>
+      <div class="val"><span class="n">4</span><small>項</small></div>
+    </div>
+    <div class="stat amber">
+      <div class="label">條件式／限範圍</div>
+      <div class="val"><span class="n">5</span><small>項</small></div>
+    </div>
+    <div class="stat red">
+      <div class="label">不可變動</div>
+      <div class="val"><span class="n">3</span><small>項</small></div>
+    </div>
+  </div>
+
+  <div class="list-toolbar">
+    <div>
+      <div class="section-title">全部項目</div>
+      <div class="section-sub" id="sectionSub">依工地公告順序排列，點擊卡片可對照調整範圍與規格</div>
+    </div>
+    <div class="sort-row" id="sortRow">
+      <span class="sort-label">排序</span>
+      <div class="sort-btn" data-sort="default" data-active="true">預設順序</div>
+      <div class="sort-btn" data-sort="ok-first" data-active="false">依類別・可變動優先</div>
+      <div class="sort-btn" data-sort="no-first" data-active="false">依類別・不可變動優先</div>
+    </div>
+  </div>
+
+  <div class="list" id="listEl">
+
+    <div class="card">
+      <div class="idx">01</div>
+      <div>
+        <h3>穿樑尺寸</h3>
+        <p>需結構計算並符合法規，不可變動。</p>
+        <div class="spec-tags"><span class="spec">冷氣穿樑套管 3吋管 / 9cm</span></div>
+      </div>
+      <div class="badge no">不可變動</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">02</div>
+      <div>
+        <h3>室內門框（樣品屋）</h3>
+        <p>樣品屋門框為設計師規劃，非工地現場實物。如欲施作「隱藏門」，可將原設計門框退掉後自行施作。</p>
+      </div>
+      <div class="badge cond">可退料自行施作</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">03</div>
+      <div>
+        <h3>浴室門</h3>
+        <p>退掉浴室門，防水仍照樣施作。只要變更未破壞防水層，皆享有防水保固。</p>
+      </div>
+      <div class="badge ok">可退・防水保固</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">04</div>
+      <div>
+        <h3>隔間牆</h3>
+        <p>除廁所、隔戶牆之外，其餘隔間牆皆可變動。</p>
+      </div>
+      <div class="badge ok">可變動</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">05</div>
+      <div>
+        <h3>插座 ／ 電源開關</h3>
+        <p>可增加、減少及移位。</p>
+      </div>
+      <div class="badge ok">可增減移位</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">06</div>
+      <div>
+        <h3>門框位置</h3>
+        <p>除玄關門、窗戶及陽台門位置不可變動，其餘門框位置皆可變動。</p>
+      </div>
+      <div class="badge cond">部分可變動</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">07</div>
+      <div>
+        <h3>衛浴設備</h3>
+        <p>可換位置，僅限於原設計廁所範圍內。不需要之物件也可退掉不安裝。</p>
+      </div>
+      <div class="badge cond">限原廁所範圍</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">08</div>
+      <div>
+        <h3>開關箱</h3>
+        <p>位置不可變動，容量僅能增加 110V 與 220V 各一組。增設方式二選一：</p>
+        <div class="spec-tags">
+          <span class="spec">方式(1) 110V ×1 ＋ 220V ×1</span>
+          <span class="spec">方式(2) 110V ×3</span>
+        </div>
+      </div>
+      <div class="badge cond">容量可增・位置固定</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">09</div>
+      <div>
+        <h3>電動曬衣桿（兩房）</h3>
+        <p>依現場實際空間調整方向及位置。</p>
+      </div>
+      <div class="badge ok">可調整方向位置</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">10</div>
+      <div>
+        <h3>抽油煙機型號</h3>
+        <p>固定配置型號如下：</p>
+        <div class="spec-tags"><span class="spec">MH-9029H · 林內倒T型排煙機</span></div>
+      </div>
+      <div class="badge no">固定型號</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">11</div>
+      <div>
+        <h3>消防灑水頭</h3>
+        <p>需依現場實際狀況符合法規施作，因此未標示於圖面上。</p>
+      </div>
+      <div class="badge cond">依現場法規施作</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">12</div>
+      <div>
+        <h3>廚具</h3>
+        <p>已與廠商確認，不可進行變動。如需變動，該戶廚具將先行全數退掉，改由住戶自行與廠商聯絡變動事項及安裝時間。</p>
+      </div>
+      <div class="badge no">不可變動</div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>碧瑤敦灃 · 客變常見問題彙整</span>
+    <span>REV. 115.08.11</span>
+  </footer>
+
+</div>
+
+<button class="fab-btn fab-schedule" id="scheduleFab" title="客變日程" type="button">📅</button>
+<button class="fab-btn fab-add" id="fabBtn" title="新增客變項目" type="button">＋</button>
+
+<div class="modal-overlay" id="scheduleOverlay">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <div class="add-title">各階段辦理變更時段</div>
+        <div class="add-hint">碧瑤敦灃・依樓層劃分四個階段辦理</div>
+      </div>
+      <button class="modal-close" id="scheduleClose" type="button">✕</button>
+    </div>
+
+    <div class="schedule-notice">
+      本人同意於 115 年 11 月 1 日起至 116 年 2 月 28 日止，將欲變更之相關建築圖說提供給公司並完成室內工程變更相關程序，逾期則視同放棄變更權利。辦理變更的時段是依各階段該樓層戶別的日期為主。
+    </div>
+
+    <div class="stage-list">
+
+      <div class="stage-card">
+        <div class="stage-head">
+          <span class="stage-tag">第一階段</span>
+          <span class="stage-floor">2 ~ 8 樓</span>
+        </div>
+        <div class="stage-dates">
+          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 9 月 15 日 至 115 年 10 月 14 日</span></div>
+          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 11 月 1 日 至 115 年 11 月 30 日</span></div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">
+          <span class="stage-tag">第二階段</span>
+          <span class="stage-floor">9 ~ 14 樓</span>
+        </div>
+        <div class="stage-dates">
+          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 10 月 15 日 至 115 年 11 月 14 日</span></div>
+          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">115 年 12 月 1 日 至 115 年 12 月 31 日</span></div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">
+          <span class="stage-tag">第三階段</span>
+          <span class="stage-floor">15 ~ 20 樓</span>
+        </div>
+        <div class="stage-dates">
+          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 11 月 15 日 至 115 年 12 月 14 日</span></div>
+          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 1 月 1 日 至 116 年 1 月 31 日</span></div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">
+          <span class="stage-tag">第四階段</span>
+          <span class="stage-floor">21 ~ 24 樓</span>
+        </div>
+        <div class="stage-dates">
+          <div class="stage-date-row"><span class="d-label">預約時間</span><span class="d-value">115 年 12 月 15 日 至 116 年 1 月 14 日</span></div>
+          <div class="stage-date-row"><span class="d-label">客變日期</span><span class="d-value">116 年 2 月 1 日 至 116 年 2 月 28 日</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <div class="add-title">新增客變項目</div>
+        <div class="add-hint">輸入細相說明，AI 會自動生成標題與狀態標籤</div>
+      </div>
+      <button class="modal-close" id="modalClose" type="button">✕</button>
+    </div>
+
+    <div class="add-body-inner">
+
+      <div class="field">
+        <label>細相說明</label>
+        <textarea id="detailInput" placeholder="請輸入這項客變的細節，例如：主臥更衣室層板可依實際需求增減，但需在原設計動線範圍內…"></textarea>
+      </div>
+
+      <div class="add-actions" style="justify-content:flex-start; margin-top:-2px;">
+        <button class="gen-btn" id="genBtn">✦ AI 自動判斷標題與狀態</button>
+        <span class="status-note" id="genStatusNote"></span>
+      </div>
+
+      <div class="field">
+        <label>主要標題</label>
+        <input type="text" id="titleInput" placeholder="AI 生成後會自動填入，也可手動修改">
+      </div>
+
+      <div class="field">
+        <label>狀態標籤文字</label>
+        <input type="text" id="badgeInput" placeholder="例如：可退・防水保固、限原廁所範圍…">
+      </div>
+
+      <div class="field">
+        <label>狀態分類（供上方統計與顏色使用，AI 會預選，可手動調整）</label>
+        <div class="status-row" id="statusRow">
+          <div class="status-pill ok" data-status="ok" data-active="true">可變動</div>
+          <div class="status-pill cond" data-status="cond" data-active="false">條件式／限範圍</div>
+          <div class="status-pill no" data-status="no" data-active="false">不可變動</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>規格標籤（選填，Enter 新增）</label>
+        <div class="spec-input-row">
+          <input type="text" id="specInput" placeholder="例如：110V ×1 ＋ 220V ×1">
+          <button class="small-btn" id="specAddBtn">新增標籤</button>
+        </div>
+        <div class="draft-tags" id="draftTags" style="margin-top:10px;"></div>
+      </div>
+
+      <div class="add-actions">
+        <span class="status-note" id="addStatusNote"></span>
+        <button class="submit-btn" id="submitBtn">新增項目</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, deleteDoc, doc, setDoc,
+  onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+/* =====================================================================
+   FIREBASE 設定 — 請替換成你自己 Firebase 專案的設定值
+   (Firebase 主控台 → 專案設定 → 一般 → 你的應用程式 → SDK 設定與程式碼片段)
+   ===================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyBHovlvDqg-es6nppcSprlu5Z0O0GyjKcQ",
+  authDomain: "customerchange-e4474.firebaseapp.com",
+  projectId: "customerchange-e4474",
+  storageBucket: "customerchange-e4474.firebasestorage.app",
+  messagingSenderId: "1003816024079",
+  appId: "1:1003816024079:web:56aed8be61743afa7b4b7a",
+  measurementId: "G-QEVR0K7CXR"
+};
+
+/* Firestore 安全性規則建議（貼到 Firebase 主控台 → Firestore Database → 規則）：
+
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /biyaoDunfengCustomItems/{itemId} {
+         allow read: if true;
+         allow create: if true;
+         allow delete: if true;
+         allow update: if false;
+       }
+       match /biyaoDunfengHiddenOriginals/{origId} {
+         allow read: if true;
+         allow write: if true;
+       }
+     }
+   }
+   這組規則開放所有人讀寫這兩個集合，方便社區共用；如果擔心被惡意灌爆，
+   之後可以再加上 Firebase App Check 或簡單的密碼驗證。
+*/
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const itemsCol = collection(db, 'biyaoDunfengCustomItems');
+const hiddenCol = collection(db, 'biyaoDunfengHiddenOriginals');
+
+/* =====================================================================
+   GEMINI API 金鑰 — 請替換成你自己在 Google AI Studio 申請的金鑰
+   (https://aistudio.google.com → Get API key，免費、不用信用卡)
+   ===================================================================== */
+const GEMINI_API_KEY = "AQ.Ab8RN6IOW8MI3E-598nLA5Sddk9uMJ3EFya6A8Myaibj5yvRlA";
+const GEMINI_MODEL = "gemini-2.5-flash";
+
+(function(){
+  const listEl = document.querySelector('.list');
+  const fabBtn = document.getElementById('fabBtn');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+  const scheduleFab = document.getElementById('scheduleFab');
+  const scheduleOverlay = document.getElementById('scheduleOverlay');
+  const scheduleClose = document.getElementById('scheduleClose');
+  const detailInput = document.getElementById('detailInput');
+  const titleInput = document.getElementById('titleInput');
+  const badgeInput = document.getElementById('badgeInput');
+  const genBtn = document.getElementById('genBtn');
+  const genStatusNote = document.getElementById('genStatusNote');
+  const specInput = document.getElementById('specInput');
+  const specAddBtn = document.getElementById('specAddBtn');
+  const draftTags = document.getElementById('draftTags');
+  const statusRow = document.getElementById('statusRow');
+  const submitBtn = document.getElementById('submitBtn');
+  const addStatusNote = document.getElementById('addStatusNote');
+  const sortRow = document.getElementById('sortRow');
+  const sectionSub = document.getElementById('sectionSub');
+
+  const STATUS_LABEL = { ok: '可變動', cond: '條件式／限範圍', no: '不可變動' };
+  const GROUP_TITLE = { ok: '可變動', cond: '條件式／限範圍', no: '不可變動' };
+  let draftSpecs = [];
+  let activeStatus = 'ok';
+  let customItems = [];   // {id, title, detail, specs, status, badge, order}
+  let hiddenOriginals = []; // ['orig-1', ...]
+  let currentSortMode = 'default';
+
+  // ---- modal open/close ----
+  function openModal(){
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  fabBtn.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+  function openSchedule(){
+    scheduleOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSchedule(){
+    scheduleOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  scheduleFab.addEventListener('click', openSchedule);
+  scheduleClose.addEventListener('click', closeSchedule);
+  scheduleOverlay.addEventListener('click', (e) => { if (e.target === scheduleOverlay) closeSchedule(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape'){ closeModal(); closeSchedule(); }
+  });
+
+  // ---- status pill select (manual override) ----
+  statusRow.addEventListener('click', (e) => {
+    const pill = e.target.closest('.status-pill');
+    if (!pill) return;
+    activeStatus = pill.dataset.status;
+    statusRow.querySelectorAll('.status-pill').forEach(p => p.dataset.active = (p === pill) ? 'true' : 'false');
+  });
+  function setActiveStatus(status){
+    activeStatus = status;
+    statusRow.querySelectorAll('.status-pill').forEach(p => p.dataset.active = (p.dataset.status === status) ? 'true' : 'false');
+  }
+
+  // ---- spec tag add/remove ----
+  function renderDraftTags(){
+    draftTags.innerHTML = '';
+    draftSpecs.forEach((spec, i) => {
+      const el = document.createElement('span');
+      el.className = 'spec';
+      el.innerHTML = spec.replace(/</g,'&lt;') + ' <span class="x">✕</span>';
+      el.addEventListener('click', () => { draftSpecs.splice(i,1); renderDraftTags(); });
+      draftTags.appendChild(el);
+    });
+  }
+  function addSpec(){
+    const v = specInput.value.trim();
+    if (!v) return;
+    draftSpecs.push(v);
+    specInput.value = '';
+    renderDraftTags();
+  }
+  specAddBtn.addEventListener('click', addSpec);
+  specInput.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); addSpec(); } });
+
+  // ---- AI: generate title + status badge text + status category from 細相 ----
+  async function generateAll(){
+    const detail = detailInput.value.trim();
+    genStatusNote.textContent = '';
+    genStatusNote.className = 'status-note';
+    if (!detail){
+      genStatusNote.textContent = '請先輸入細相說明';
+      genStatusNote.className = 'status-note error';
+      return;
+    }
+    genBtn.disabled = true;
+    const originalLabel = genBtn.textContent;
+    genBtn.textContent = '判斷中…';
+    try {
+      const systemPrompt = [
+        '你是預售屋客變（客戶變更）文件的編輯助理。使用者會給你一段客變細節說明（細相），你要輸出「只包含 JSON、不要任何其他文字」的結果，格式如下：',
+        '{"title":"主要標題","badge":"狀態標籤文字","status":"ok|cond|no"}',
+        '規則：',
+        '1. title：4 到 10 個繁體中文字，準確代表這段細相的主題（涉及的空間、設備或項目名稱），不要重複整段細相內容，不要加引號。',
+        '2. badge：一句精簡的狀態標籤文字（約 3 到 10 個字），要反映這項目實際可否變動、及變動的條件或範圍，例如「可退・防水保固」「限原設計範圍」「固定型號」「不可變動」「可增減移位」「依現場法規施作」這類風格，用「・」分隔可以有兩個重點。',
+        '3. status：判斷這項客變的整體性質，只能是三選一 —— "ok" 表示可以自由變動、沒有額外限制；"cond" 表示可以變動但有條件、範圍限制、或需退料自行施作；"no" 表示不可變動或型號規格固定。'
+      ].join('\n');
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [ { role: 'user', parts: [{ text: detail }] } ],
+          generationConfig: { responseMimeType: 'application/json' }
+        })
+      });
+      if (!response.ok) throw new Error('API 錯誤 ' + response.status);
+      const data = await response.json();
+      const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+      const parsed = JSON.parse(raw);
+      if (!parsed.title || !parsed.badge || !parsed.status) throw new Error('回傳格式不完整');
+      titleInput.value = String(parsed.title).trim();
+      badgeInput.value = String(parsed.badge).trim();
+      if (['ok','cond','no'].includes(parsed.status)) setActiveStatus(parsed.status);
+      genStatusNote.textContent = '已自動填入，可再手動調整';
+      genStatusNote.className = 'status-note';
+    } catch (err) {
+      genStatusNote.textContent = 'AI 判斷失敗，請手動填寫標題與狀態';
+      genStatusNote.className = 'status-note error';
+      console.error(err);
+    } finally {
+      genBtn.disabled = false;
+      genBtn.textContent = originalLabel;
+    }
+  }
+  genBtn.addEventListener('click', generateAll);
+
+  // ---- stats ----
+  function updateStats(){
+    const counts = { ok: 0, cond: 0, no: 0 };
+    listEl.querySelectorAll('.card').forEach(card => {
+      if (card.style.display === 'none') return;
+      const b = card.querySelector('.badge');
+      if (!b) return;
+      if (b.classList.contains('ok')) counts.ok++;
+      else if (b.classList.contains('cond')) counts.cond++;
+      else if (b.classList.contains('no')) counts.no++;
+    });
+    document.querySelector('.stat.ok .n').textContent = counts.ok;
+    document.querySelector('.stat.amber .n').textContent = counts.cond;
+    document.querySelector('.stat.red .n').textContent = counts.no;
+  }
+
+  // ---- renumber visible cards ----
+  function renumber(){
+    let n = 1;
+    listEl.querySelectorAll('.card').forEach(card => {
+      if (card.style.display === 'none') return;
+      const idxEl = card.querySelector('.idx');
+      if (idxEl) idxEl.textContent = String(n).padStart(2,'0');
+      n++;
+    });
+  }
+
+  // ---- sorting ----
+  function getStatus(card){
+    const badge = card.querySelector('.badge');
+    if (!badge) return 'ok';
+    if (badge.classList.contains('ok')) return 'ok';
+    if (badge.classList.contains('cond')) return 'cond';
+    return 'no';
+  }
+  function clearGroupLabels(){
+    listEl.querySelectorAll('.group-label').forEach(el => el.remove());
+  }
+  function applySort(mode){
+    currentSortMode = mode;
+    sortRow.querySelectorAll('.sort-btn').forEach(b => b.dataset.active = (b.dataset.sort === mode) ? 'true' : 'false');
+    clearGroupLabels();
+
+    const allCards = Array.from(listEl.querySelectorAll('.card'));
+    const visible = allCards.filter(c => c.style.display !== 'none');
+    const hidden = allCards.filter(c => c.style.display === 'none');
+
+    if (mode === 'default'){
+      visible.sort((a,b) => Number(a.dataset.order) - Number(b.dataset.order));
+      visible.forEach(card => listEl.appendChild(card));
+      sectionSub.textContent = '依工地公告順序排列，點擊卡片可對照調整範圍與規格';
+    } else {
+      const rank = mode === 'ok-first' ? { ok:0, cond:1, no:2 } : { no:0, cond:1, ok:2 };
+      visible.sort((a,b) => {
+        const ra = rank[getStatus(a)], rb = rank[getStatus(b)];
+        if (ra !== rb) return ra - rb;
+        return Number(a.dataset.order) - Number(b.dataset.order);
+      });
+      let lastStatus = null;
+      visible.forEach(card => {
+        const st = getStatus(card);
+        if (st !== lastStatus){
+          const label = document.createElement('div');
+          label.className = 'group-label ' + st;
+          label.innerHTML = `<span class="g-dot"></span>${GROUP_TITLE[st]}`;
+          listEl.appendChild(label);
+          lastStatus = st;
+        }
+        listEl.appendChild(card);
+      });
+      sectionSub.textContent = '依變動類別分組排列，同類別內依原始順序排列';
+    }
+    hidden.forEach(card => listEl.appendChild(card));
+    renumber();
+  }
+  sortRow.addEventListener('click', (e) => {
+    const btn = e.target.closest('.sort-btn');
+    if (!btn) return;
+    applySort(btn.dataset.sort);
+  });
+
+  // ---- attach delete button + actions wrapper to a card ----
+  function wireCardActions(card, id){
+    card.dataset.id = id;
+    const badge = card.querySelector('.badge');
+    if (!badge || badge.closest('.card-actions')) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'card-actions';
+    badge.parentNode.insertBefore(wrapper, badge);
+    wrapper.appendChild(badge);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'del-btn';
+    delBtn.type = 'button';
+    delBtn.title = '刪除此項目';
+    delBtn.textContent = '✕ 刪除';
+    wrapper.appendChild(delBtn);
+  }
+
+  // ---- delete handling with inline confirm safeguard (event delegation) ----
+  function performDelete(card){
+    const id = card.dataset.id;
+    card.classList.add('removing');
+    setTimeout(() => {
+      card.style.display = 'none';
+      updateStats();
+      applySort(currentSortMode);
+    }, 180);
+
+    if (id && id.startsWith('orig-')){
+      setDoc(doc(hiddenCol, id), { hiddenAt: serverTimestamp() }).catch(err => console.error('刪除失敗', err));
+    } else {
+      deleteDoc(doc(itemsCol, id)).catch(err => console.error('刪除失敗', err));
+    }
+  }
+
+  function closeConfirm(wrapper){
+    const row = wrapper.querySelector('.confirm-row');
+    if (row) row.remove();
+    const del = wrapper.querySelector('.del-btn');
+    if (del) del.style.display = '';
+  }
+
+  listEl.addEventListener('click', (e) => {
+    const delBtn = e.target.closest('.del-btn');
+    if (delBtn){
+      const wrapper = delBtn.closest('.card-actions');
+      // close any other open confirm prompts first
+      listEl.querySelectorAll('.card-actions').forEach(w => { if (w !== wrapper) closeConfirm(w); });
+      if (wrapper.querySelector('.confirm-row')) return;
+      delBtn.style.display = 'none';
+      const row = document.createElement('div');
+      row.className = 'confirm-row';
+      row.innerHTML = `<span class="confirm-text">確定刪除？</span><button type="button" class="confirm-btn yes">刪除</button><button type="button" class="confirm-btn no">取消</button>`;
+      wrapper.appendChild(row);
+      return;
+    }
+    const yesBtn = e.target.closest('.confirm-btn.yes');
+    if (yesBtn){
+      const card = yesBtn.closest('.card');
+      performDelete(card);
+      return;
+    }
+    const noBtn = e.target.closest('.confirm-btn.no');
+    if (noBtn){
+      closeConfirm(noBtn.closest('.card-actions'));
+      return;
+    }
+  });
+
+  // clicking anywhere outside a card cancels any open confirm prompt
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.card-actions')) return;
+    listEl.querySelectorAll('.card-actions').forEach(w => closeConfirm(w));
+  });
+
+  // ---- build & append a card ----
+  // ---- build & append a card (DOM only, no persistence side-effects) ----
+  function appendCardDom(item){
+    const idx = listEl.querySelectorAll('.card').length + 1;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.order = item.order || 0;
+    const badgeLabel = item.badge || STATUS_LABEL[item.status] || '';
+    const specsHtml = (item.specs && item.specs.length)
+      ? `<div class="spec-tags">${item.specs.map(s => `<span class="spec">${s.replace(/</g,'&lt;')}</span>`).join('')}</div>`
+      : '';
+    card.innerHTML = `
+      <div class="idx">${String(idx).padStart(2,'0')}</div>
+      <div>
+        <h3>${item.title.replace(/</g,'&lt;')}</h3>
+        <p>${item.detail.replace(/</g,'&lt;')}</p>
+        ${specsHtml}
+      </div>
+      <div class="badge ${item.status}">${badgeLabel.replace(/</g,'&lt;')}</div>
+    `;
+    listEl.appendChild(card);
+    wireCardActions(card, item.id);
+  }
+
+  // ---- Firestore real-time sync: everyone viewing this page sees the same data ----
+  function initRealtime(){
+    // wire up the 12 static original cards first
+    listEl.querySelectorAll('.card').forEach((card, i) => {
+      wireCardActions(card, 'orig-' + (i + 1));
+      card.dataset.order = i + 1;
+    });
+
+    onSnapshot(hiddenCol, (snapshot) => {
+      hiddenOriginals = snapshot.docs.map(d => d.id);
+      listEl.querySelectorAll('.card[data-id^="orig-"]').forEach(card => {
+        card.style.display = hiddenOriginals.includes(card.dataset.id) ? 'none' : '';
+      });
+      applySort(currentSortMode);
+      updateStats();
+    }, (err) => console.error('讀取共用資料失敗（隱藏清單）', err));
+
+    onSnapshot(itemsCol, (snapshot) => {
+      customItems = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      listEl.querySelectorAll('.card:not([data-id^="orig-"])').forEach(c => c.remove());
+      customItems
+        .slice()
+        .sort((a, b) => (a.order || 0) - (b.order || 0))
+        .forEach(item => appendCardDom(item));
+      applySort(currentSortMode);
+      updateStats();
+    }, (err) => console.error('讀取共用資料失敗（新增項目）', err));
+  }
+
+  // ---- submit new item ----
+  submitBtn.addEventListener('click', async () => {
+    const title = titleInput.value.trim();
+    const detail = detailInput.value.trim();
+    const badge = badgeInput.value.trim();
+    if (!detail){
+      addStatusNote.textContent = '請輸入細相說明';
+      addStatusNote.className = 'status-note error';
+      return;
+    }
+    if (!title){
+      addStatusNote.textContent = '請輸入標題，或點擊「AI 自動判斷」';
+      addStatusNote.className = 'status-note error';
+      return;
+    }
+    const item = {
+      title, detail,
+      specs: draftSpecs.slice(),
+      status: activeStatus,
+      badge: badge || STATUS_LABEL[activeStatus],
+      order: Date.now()
+    };
+
+    submitBtn.disabled = true;
+    try {
+      await addDoc(itemsCol, item);
+
+      // reset form — the card itself appears via the Firestore listener above
+      detailInput.value = '';
+      titleInput.value = '';
+      badgeInput.value = '';
+      draftSpecs = [];
+      renderDraftTags();
+      setActiveStatus('ok');
+      addStatusNote.textContent = '已新增項目（社區共用）';
+      addStatusNote.className = 'status-note';
+      setTimeout(() => {
+        addStatusNote.textContent = '';
+        closeModal();
+      }, 550);
+    } catch (err) {
+      addStatusNote.textContent = '新增失敗，請確認 Firebase 設定或網路連線';
+      addStatusNote.className = 'status-note error';
+      console.error('新增失敗', err);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  initRealtime();
+})();
+</script>
+
+</body>
+</html>
